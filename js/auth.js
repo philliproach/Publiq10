@@ -1,5 +1,5 @@
 // Frontend helper for auth actions
-const AUTH_API = (window.AUTH_API_BASE || 'http://localhost:4000');
+const AUTH_API = window.AUTH_API_BASE;
 
 async function registerUser({ username, email, password }) {
   const res = await fetch(`${AUTH_API}/register`, {

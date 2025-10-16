@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const { init, createUser, getUserByEmail, getUserById } = require('./db');
 const bodyParser = require('body-parser');
 const path = require('path');
+const fs = require('fs');
+const fsp = fs.promises;
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -15,6 +17,10 @@ init().catch(err => console.error('Failed to initialize storage:', err));
 
 app.use(cors());
 app.use(bodyParser.json());
+
+// Serve frontend static files from project root so visiting the API origin
+// can also load the site's pages (e.g. GET /login, GET /register).
+app.use(express.static(path.join(__dirname, '..')));
 
 // Register
 app.post('/register', async (req, res) => {
@@ -72,21 +78,29 @@ app.get('/me', async (req, res) => {
 });
 
 // Root route - helpful message for browsers
-app.get('/', (req, res) => {
-  res.send(`
-    <html>
-      <head><title>Publiq Auth API</title></head>
-      <body style="font-family: Arial, Helvetica, sans-serif;line-height:1.6;padding:2rem;">
-        <h1>Publiq Auth API</h1>
-        <p>The authentication API is running.</p>
-        <ul>
-          <li>POST /register — register new user (json: username, email, password)</li>
-          <li>POST /login — login (json: email, password)</li>
-          <li>GET /me — get current user (Authorization: Bearer &lt;token&gt;)</li>
-        </ul>
-      </body>
-    </html>
-  `);
+app.get('/', async (req, res) => {
+  // try to serve the site's index.html (one level up). This allows the API and frontend to share origin
+  const siteIndex = path.join(__dirname, '..', 'index.html');
+  try {
+    await fsp.access(siteIndex);
+    return res.sendFile(siteIndex);
+  } catch (e) {
+    // fallback status page
+    return res.send(`
+      <html>
+        <head><title>Publiq Auth API</title></head>
+        <body style="font-family: Arial, Helvetica, sans-serif;line-height:1.6;padding:2rem;">
+          <h1>Publiq Auth API</h1>
+          <p>The authentication API is running.</p>
+          <ul>
+            <li>POST /register — register new user (json: username, email, password)</li>
+            <li>POST /login — login (json: email, password)</li>
+            <li>GET /me — get current user (Authorization: Bearer &lt;token&gt;)</li>
+          </ul>
+        </body>
+      </html>
+    `);
+  }
 });
 
 app.listen(PORT, () => {

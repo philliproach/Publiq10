@@ -43,7 +43,7 @@ function showHeaderUser() {
 		return;
 	}
 
-	const API = window.AUTH_API_BASE || 'http://localhost:4000';
+	const API = window.AUTH_API_BASE;
 	fetch(`${API}/me`, { headers: { 'Authorization': `Bearer ${token}` } })
 		.then(r => r.json())
 		.then(data => {

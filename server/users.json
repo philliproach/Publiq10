@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "id": 1,
+    "username": "tester",
+    "email": "tester@example.com",
+    "password": "$2a$10$ab/sI/uH7KcDQ6vLxfJ7IeTrpmo.FX6mmAf7CtqyN8wg1x0XNgsP6",
+    "avatar": null,
+    "created_at": "2025-10-16T18:16:08.410Z"
+  }
+]
