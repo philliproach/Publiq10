@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Settings - Publiq Forum</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="icon" type="image/x-icon" href="../../media/logo.png">
+	<style>
+		.settings-section {
+			margin-bottom: 2rem;
+			padding-bottom: 2rem;
+			border-bottom: 1px solid var(--border-color);
+		}
+		
+		.settings-section:last-child {
+			border-bottom: none;
+		}
+		
+		.settings-section h3 {
+			color: var(--text-primary);
+			font-size: 1.25rem;
+			margin-bottom: 1rem;
+			font-weight: 600;
+		}
+		
+		.setting-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 1rem;
+			background: var(--bg-primary);
+			border-radius: 8px;
+			margin-bottom: 0.75rem;
+			transition: background-color 0.3s ease;
+		}
+		
+		.setting-info h4 {
+			color: var(--text-primary);
+			font-size: 1rem;
+			font-weight: 500;
+			margin-bottom: 0.25rem;
+		}
+		
+		.setting-info p {
+			color: var(--text-muted);
+			font-size: 0.875rem;
+		}
+		
+		.theme-buttons {
+			display: flex;
+			gap: 0.5rem;
+		}
+		
+		.theme-btn {
+			padding: 0.5rem 1rem;
+			border: 2px solid var(--border-color);
+			background: var(--bg-secondary);
+			color: var(--text-secondary);
+			border-radius: 6px;
+			cursor: pointer;
+			font-weight: 500;
+			transition: all 0.2s ease;
+		}
+		
+		.theme-btn:hover {
+			background: var(--hover-bg);
+			border-color: var(--text-secondary);
+		}
+		
+		.theme-btn.active {
+			background: var(--text-primary);
+			color: var(--bg-secondary);
+			border-color: var(--text-primary);
+		}
+	</style>
+  </head>
+
+	<body>		
+		<header id="header">
+			<div class="innertube">
+				<a href="/" class="logo-link">
+					<img src="../../media/logo.png" alt="Publiq Forum Logo" class="logo">
+					<h1>Publiq Forum</h1>
+				</a>
+			</div>
+		</header>
+		
+		<div id="wrapper">
+			<nav id="nav">
+				<div class="innertube">
+					<h3>Post</h3>
+					<ul>
+						<li><a href="../../post/">See posts</a></li>
+						<li><a href="../../post/create/">Create posts</a></li>
+					</ul>
+					<h3>User</h3>
+					<ul>
+						<li><a href="../../user/settings/">Settings</a></li>
+						<li><a href="../../user/[username]/">See profile</a></li>
+					</ul>
+					<h3>Login</h3>
+					<ul>
+						<li><a href="../../login/">Login</a></li>
+						<li><a href="../../register/">Register</a></li>
+					</ul>
+				</div>
+			</nav>
+			
+			<main>
+				<h2>Settings</h2>
+				<p style="margin-bottom: 2rem;">Customize your Publiq Forum experience.</p>
+				
+				<div class="settings-section">
+					<h3>Appearance</h3>
+					<div class="setting-item">
+						<div class="setting-info">
+							<h4>Theme</h4>
+							<p>Choose your preferred color scheme</p>
+						</div>
+						<div class="theme-buttons">
+							<button class="theme-btn" data-theme="light" id="light-btn">Light</button>
+							<button class="theme-btn" data-theme="dark" id="dark-btn">Dark</button>
+						</div>
+					</div>
+				</div>
+				
+				<div class="settings-section">
+					<h3>Account</h3>
+					<div class="setting-item">
+						<div class="setting-info">
+							<h4>Email</h4>
+							<p>philliproach1111@gmail.com</p>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+		
+		<footer id="footer">
+			<div class="innertube">
+				<div class="footer-content">
+					<div class="footer-section">
+						<h4>Forum</h4>
+						<ul>
+							<li><a href="../../post/">Browse Posts</a></li>
+							<li><a href="../../post/create/">Create Post</a></li>
+							<li><a href="../../user/settings/">Settings</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>Account</h4>
+						<ul>
+							<li><a href="../../login/">Login</a></li>
+							<li><a href="../../register/">Register</a></li>
+							<li><a href="../../user/[username]/">Profile</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>Resources</h4>
+						<ul>
+							<li><a href="../../about/">About</a></li>
+							<li><a href="../../help/">Help</a></li>
+							<li><a href="../../terms/">Terms</a></li>
+							<li><a href="../../privacy/">Privacy</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>Contact</h4>
+						<ul>
+							<li><a href="mailto:philliproach1111@gmail.com">Email Support</a></li>
+							<li>Phillip Roach</li>
+						</ul>
+					</div>
+				</div>
+				<div class="footer-bottom">
+					<p>&copy; <span id="year"></span> Publiq Forum. All rights reserved.</p>
+				</div>
+			</div>
+		</footer>
+		
+		<script src="../../js/main.js"></script>
+		<script src="../../js/settings.js"></script>
+	</body>
+</html>
