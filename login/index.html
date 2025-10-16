@@ -48,7 +48,15 @@
             <!-- PAGE CONTENT GOES HERE -->
             <section>
                <h2>Login</h2>
-               <p>Publiq is a simple forum platform. Use the navigation above to access different sections.</p>
+               <p>Enter your email and password to sign in.</p>
+               <form id="login-form" style="max-width:420px;margin-top:1rem;">
+                   <label>Email</label>
+                   <input type="email" id="email" required style="width:100%;padding:0.5rem;margin:0.5rem 0;border-radius:6px;border:1px solid var(--border-color);">
+                   <label>Password</label>
+                   <input type="password" id="password" required style="width:100%;padding:0.5rem;margin:0.5rem 0;border-radius:6px;border:1px solid var(--border-color);">
+                   <button type="submit" id="login-btn" class="theme-btn" style="margin-top:0.5rem;">Login</button>
+               </form>
+               <p style="margin-top:1rem;">Don't have an account? <a href="../register/">Register</a></p>
             </section>
             <!-- PAGE CONTENT GOES HERE -->
 
@@ -92,7 +100,31 @@
             </div>
          </div>
       </footer>
-      <script src="../js/main.js"></script>
-	  <script src="../js/settings.js"></script>
+         <script src="../js/main.js"></script>
+         <script>
+            // handle form
+            document.addEventListener('DOMContentLoaded', function(){
+               const form = document.getElementById('login-form');
+               form.addEventListener('submit', async function(e){
+                  e.preventDefault();
+                  const email = document.getElementById('email').value;
+                  const password = document.getElementById('password').value;
+                  try {
+                     const res = await fetch((window.AUTH_API_BASE || 'http://localhost:4000') + '/login', {
+                        method: 'POST', headers: {'Content-Type':'application/json'},
+                        body: JSON.stringify({ email, password })
+                     });
+                     const data = await res.json();
+                     if (data.token) {
+                        localStorage.setItem('auth_token', data.token);
+                        window.location.href = '/';
+                     } else {
+                        alert(data.error || 'Login failed');
+                     }
+                  } catch (err) { alert('Request failed'); }
+               });
+            });
+         </script>
+      	<script src="../js/settings.js"></script>
    </body>
 </html>

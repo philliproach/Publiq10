@@ -16,6 +16,7 @@
 	--hover-bg: #f1f3f5;
 	--active-bg: #e9ecef;
 	--shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+	--accent: #4f46e5; /* primary accent for buttons */
 }
 
 [data-theme="dark"] {
@@ -28,6 +29,7 @@
 	--hover-bg: #3a3a3a;
 	--active-bg: #404040;
 	--shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	--accent: #7c8cff;
 }
 
 body {
@@ -60,6 +62,36 @@ body {
 
 .logo-link:hover {
 	opacity: 0.8;
+}
+
+/* Header user display (top-right) */
+.header-user {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 0.5rem;
+	margin-left: auto;
+}
+
+.header-user-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	text-decoration: none;
+	color: var(--text-secondary);
+}
+
+.header-user-avatar {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 1px solid var(--border-color);
+}
+
+.header-user-name {
+	font-weight: 600;
+	color: var(--text-primary);
 }
 
 .logo {
@@ -168,6 +200,55 @@ main p {
 	font-size: 1rem;
 	line-height: 1.7;
 	transition: color 0.3s ease;
+}
+
+.theme-buttons {
+	display: inline-flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.theme-btn {
+	-webkit-appearance: none;
+	appearance: none;
+	border: 1px solid var(--border-color);
+	background: transparent;
+	color: var(--text-primary);
+	padding: 0.5rem 0.75rem;
+	font-weight: 600;
+	font-size: 0.95rem;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.15s ease, color 0.15s ease, transform 0.08s ease, box-shadow 0.12s ease;
+	box-shadow: none;
+}
+
+.theme-btn:hover {
+	background: var(--hover-bg);
+}
+
+.theme-btn:active {
+	background: var(--active-bg);
+	transform: translateY(1px);
+}
+
+.theme-btn:focus {
+	outline: none;
+	box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
+}
+
+.theme-btn.active {
+	background: var(--accent);
+	color: #ffffff;
+	border-color: transparent;
+	box-shadow: 0 6px 20px rgba(79, 70, 229, 0.18);
+}
+
+.theme-btn[disabled],
+.theme-btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	transform: none;
 }
 
 #footer {

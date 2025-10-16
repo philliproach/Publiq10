@@ -48,7 +48,17 @@
             <!-- PAGE CONTENT GOES HERE -->
             <section>
                <h2>Register</h2>
-               <p>Publiq is a simple forum platform. Use the navigation above to access different sections.</p>
+               <p>By creating an account, you're agreeing to the <a href="../privacy/">Privacy Policy</a>.</p>
+               <form id="register-form" style="max-width:480px;margin-top:1rem;">
+                   <label>Username</label>
+                   <input type="text" id="username" required style="width:100%;padding:0.5rem;margin:0.5rem 0;border-radius:6px;border:1px solid var(--border-color);">
+                   <label>Email</label>
+                   <input type="email" id="email" required style="width:100%;padding:0.5rem;margin:0.5rem 0;border-radius:6px;border:1px solid var(--border-color);">
+                   <label>Password</label>
+                   <input type="password" id="password" required style="width:100%;padding:0.5rem;margin:0.5rem 0;border-radius:6px;border:1px solid var(--border-color);">
+                   <button type="submit" class="theme-btn" style="margin-top:0.5rem;">Create account</button>
+               </form>
+               <p style="margin-top:1rem;">Already have an account? <a href="../login/">Login</a></p>
             </section>
             <!-- PAGE CONTENT GOES HERE -->
 
@@ -92,7 +102,31 @@
             </div>
          </div>
       </footer>
-      <script src="../js/main.js"></script>
-	  <script src="../js/settings.js"></script>
+         <script src="../js/main.js"></script>
+         <script>
+            document.addEventListener('DOMContentLoaded', function(){
+               const form = document.getElementById('register-form');
+               form.addEventListener('submit', async function(e){
+                  e.preventDefault();
+                  const username = document.getElementById('username').value;
+                  const email = document.getElementById('email').value;
+                  const password = document.getElementById('password').value;
+                  try {
+                     const res = await fetch((window.AUTH_API_BASE || 'http://localhost:4000') + '/register', {
+                        method: 'POST', headers: {'Content-Type':'application/json'},
+                        body: JSON.stringify({ username, email, password })
+                     });
+                     const data = await res.json();
+                     if (data.token) {
+                        localStorage.setItem('auth_token', data.token);
+                        window.location.href = '/';
+                     } else {
+                        alert(data.error || 'Registration failed');
+                     }
+                  } catch (err) { alert('Request failed'); }
+               });
+            });
+         </script>
+      	<script src="../js/settings.js"></script>
    </body>
 </html>
